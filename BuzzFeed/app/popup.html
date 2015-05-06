@@ -1,0 +1,117 @@
+<!doctype html>
+<html ng-app='BuzzFeederApp' ng-csp=''>
+
+<head>
+    <meta charset="utf-8">
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css styles/main.css -->
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link href="styles/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/font-awesome/css/font-awesome.min.css">
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-moment/angular-moment.min.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <script src="bower_components/ui-bootstrap/ui-bootstrap-tpls-0.12.1.min.js"></script>
+    <!-- <script src="bower_components/ui-bootstrap/ui-bootstrap-tlps-0.12.1.min.js"></script> -->
+    <script type="text/javascript" src="scripts/fbScript.js"></script>
+    <script src="scripts/parse-1.4.2.min.js"></script>
+    <!-- endbuild -->
+</head>
+
+<body>
+    <div class="theactualthing" ng-controller="BuzzCtrl">
+        <tabset>
+            <tab class="tab-space" heading="Feed">
+                <div class="search-container"></div>
+                <div class="search-box">
+                    <div class="container-1">
+                        <span class="icon"><i class="fa fa-search"></i></span>
+                        <input type="search" id="search" placeholder="Search..." name="q" ng-model="search.$" />
+                    </div>
+                </div>
+                <article class="post" ng-repeat="post in posts | filter:search" ng-bind-html-unsafe="post.attributes.BuzzDescription">
+                    <div class="profile-info">
+                        <div class="profile-pic">
+                            <img ng-hide="post.attributes.FBProfilePic == 'null'" src={{post.attributes.FBProfilePic}} alt="">
+                        </div>
+                        <div class="profile-name">
+                            <a href="">  {{post.attributes.FBName}} </a>
+                        </div>
+                        <div class="ago">
+                            <i>{{ post.createdAt | fromNow }}</i>
+                        </div>
+                        <div class="fav">
+                            <a class='btn unliked' ng-click="addToFavourites(post)" title="Add to favorites">
+                                <i class="fa fa-heart fa-2x"></i>
+                            </a>
+                        </div>
+                        <div class="save">
+                            <a class='btn unliked' ng-click="saveToBeReadLater(post)" title="Save for later read"><i class="fa fa-plus-circle fa-2x"></i></a>
+                        </div>
+                    </div>
+                    <div class="buzz-title"><a target="_blank" href="{{post.attributes.Buzz}}">{{post.attributes.BuzzTitle}}</a></div>
+                    <div class="buzz-description">
+                        {{ post.attributes.BuzzDescription | limitTo: 105 }} {{post.attributes.BuzzDescription.length
+                        < 105 ? '' : '...'}} </div>
+                            <img class="buzz-image" src="{{post.attributes.BuzzImage}}" alt="" />
+                            <div class="divide"></div>
+                </article>
+            </tab>
+            <tab class="tab-space" heading="Favourites">
+                <div class="space"></div>
+                <article class="post" ng-repeat="post in favourites track by $index" ng-bind-html-unsafe="post.BuzzDescription">
+                    <div class="profile-info">
+                        <div class="fav">
+                            <a class='btn unliked' ng-click="addToFavourites(post)" title="Add to favorites">
+                                <i class="fa fa-heart fa-2x"></i>
+                            </a>
+                        </div>
+                        <div class="save">
+                            <a class='btn unliked' ng-click="saveToBeReadLater(post)" title="Save for later read"><i class="fa fa-plus-circle fa-2x"></i></a>
+                        </div>
+                    </div>
+                    <div class="buzz-title"><a target="_blank" href="{{post.Buzz}}">{{post.BuzzTitle}}</a></div>
+                    <div class="buzz-description">
+                        {{ post.BuzzDescription | limitTo: 105 }} {{post.BuzzDescription.length
+                        < 105 ? '' : '...'}} </div>
+                            <img class="buzz-image" src="{{post.BuzzImage}}" alt="" />
+                            <div class="divide"></div>
+                </article>
+            </tab>
+            <tab class="tab-space" heading="Read Later">
+                <div class="space"></div>
+                <article class="post" ng-repeat="post in readLater track by $index" ng-bind-html-unsafe="post.BuzzDescription">
+                    <div class="profile-info">
+                        <div class="fav">
+                            <a class='btn unliked' ng-click="addToFavourites(post)" title="Add to favorites">
+                                <i class="fa fa-heart fa-2x"></i>
+                            </a>
+                        </div>
+                        <div class="save">
+                            <a class='btn unliked' ng-click="saveToBeReadLater(post)" title="Save for later read"><i class="fa fa-plus-circle fa-2x"></i></a>
+                        </div>
+                    </div>
+                    <div class="buzz-title"><a target="_blank" href="{{post.Buzz}}">{{post.BuzzTitle}}</a></div>
+                    <div class="buzz-description">
+                        {{ post.BuzzDescription | limitTo: 105 }} {{post.BuzzDescription.length
+                        < 105 ? '' : '...'}} </div>
+                            <img class="buzz-image" src="{{post.BuzzImage}}" alt="" />
+                            <div class="divide"></div>
+                </article>
+            </tab>
+        </tabset>
+        </div>
+        <!-- build:js scripts/vendor.js -->
+        <!-- bower:js -->
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:js scripts/popup.js -->
+        <script src="scripts/popup.js"></script>
+        <!-- endbuild -->
+</body>
+
+</html>

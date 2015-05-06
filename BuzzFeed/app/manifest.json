@@ -1,0 +1,37 @@
+{
+  "name": "BuzzFeeder",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "BuzzFeed chrome extension",
+  "icons": {
+    "16": "images/BF-Clear-128.png",
+    "128": "images/BF-Clear-128.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": [
+      "bower_components/jquery/dist/jquery.min.js",
+      "scripts/parse-1.4.2.min.js",
+      "scripts/chromereload.js",
+      "scripts/background.js"
+    ]
+  },
+  "browser_action": {
+    "default_icon": {
+      "19": "images/BF-Clear-128.png",
+      "38": "images/BF-Clear-128.png"
+    },
+    "default_title": "BuzzFeeder",
+    "default_popup": "popup.html"
+  },
+  "options_page": "options.html",
+  "omnibox": {
+    "keyword": "buzz custom feed"
+  },
+  "permissions": [
+    "tabs",
+    "management",
+    "http://*/*",
+    "https://*/*"
+  ]
+}
