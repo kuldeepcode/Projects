@@ -22,7 +22,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
 
 
             $.get("http://www.buzzfeed.com/buzzfeed/api/buzz", {
-                    session_key: '6d7e4350b90517f0061749ecdf0145efdc0d7758b9f1f6226f5a5b1bad6267b9hackathon4',
+                    session_key: '', // I had a session key for the hackathon 
                     url: thatURL
                 })
                 .done(function(resp) {
@@ -31,7 +31,7 @@ chrome.tabs.onUpdated.addListener(function(tabId, changeInfo, tab) {
                     var buzzdescpt = resp.buzz.description.replace('<b>','').replace('</b>','');               
                     Parse.$ = jQuery;
 
-                    Parse.initialize("nRvq1YJfh1PhNNpeKoEIKfQDNxNsticnB01rddNI", "JxA7Xrv0Nsp4pa5ErxJBjygXQmwlLF5eiFQPaCcW");
+                    Parse.initialize(); // Yor parse credentials go here
 
                     var FBId = localStorage.userId;
                     var FBName = localStorage.userName;

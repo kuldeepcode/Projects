@@ -1,6 +1,1 @@
-# buzz-custom-feed
-
-
-{ "username": "hackathon4", 
-"session_key": "6d7e4350b90517f0061749ecdf0145efdc0d7758b9f1f6226f5a5b1bad6267b9hackathon4" 
-}
+This is a chrome extension created at a BuzzFeed hackathon. It requires you to login with facebook and displays the buzzfeed articles your facebook friends have been reading on Chrome. Just upload the package as chrome extension. 
